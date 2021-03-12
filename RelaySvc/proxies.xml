@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- An exmple of RelaySvc XML specific proxy configuration file -->
+
+<relaysvc>
+    <proxy> 
+        <type>TCP</type>
+        <policy>ACTIVATE_IF_STOPPED</policy>
+        <src>gene-r-srv:17001</src>
+        <dsts>
+            <dst>gene-r-srv:7701</dst>
+            <dst>file://E:\eugener\Projects\DummyTcpListener\dummy-Activeable-1.cfg</dst>
+        </dsts>
+        <flags>
+            <flag>HEX_DUMP</flag>
+        </flags>        
+    </proxy> 
+
+    <proxy> 
+        <type>TCP</type>
+        <policy>ROUND_ROBIN</policy>
+
+        <src>gene-r-srv:17002</src>
+        <dsts>
+            <dst>gene-r-srv:7801</dst>
+            <dst>gene-r-srv:7802</dst>
+        </dsts>
+        <flags>
+            <flag>HEX_DUMP</flag>
+            <flag>TRACE</flag>
+        </flags>        
+    </proxy>
+
+    <proxy> 
+        <type>UDP</type>
+        <policy>NONE</policy>        
+        <src>*:14555</src>
+        <dsts>
+            <dst>gene-r-localhost.:14922</dst>
+        </dsts>
+        <flags>
+            <flag>HEX_DUMP</flag>
+        </flags>        
+    </proxy>
+
+    <proxy> 
+        <type>ORA</type>
+        <policy>ORA_TRANSFORM</policy>        
+        <src>localhost:1521</src>
+        <dsts>
+            <dst>10.100.66.102:1521</dst>
+            <dst>file://E:\eugener\Projects\RelaySvc\oratransform1.cfg</dst>
+        </dsts>
+        <flags>
+
+        </flags>        
+    </proxy>
+</relaysvc> 
+
